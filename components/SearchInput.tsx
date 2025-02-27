@@ -18,7 +18,7 @@ export function SearchInput() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative w-full flex-1 max-w-[800px]"
+      className="relative w-full flex-1 max-w-[300px]"
     >
       <input
         type="text"
