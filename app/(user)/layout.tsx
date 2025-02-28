@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SanityLive } from "@/sanity/lib/live";
 
 export const metadata: Metadata = {
   title: "CourseEdgeX",
@@ -26,6 +27,7 @@ export default function UserLayout({
           <main className="flex-1 pt-16">{children}</main>
         </div>
       </ThemeProvider>
+      <SanityLive />
     </ClerkProvider>
   );
 }
