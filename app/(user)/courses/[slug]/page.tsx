@@ -121,6 +121,42 @@ export default async function({ params }: CoursePageProps) {
                             </div>
                         </div>
                     </div>
+    
+                    {/* Sidebar */}
+                    <div>
+                        <div className="bg-card rounded-lg p-6 sticky top-4 border border-border">
+                            <h2 className="text-xl font-bold mb-4">Instructor</h2>
+                            {course.instructor && (
+                                <div>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        {course.instructor.photo && (
+                                        <div className="relative h-12 w-12">
+                                            <Image
+                                            src={urlFor(course.instructor.photo).url() || ""}
+                                            alt={course.instructor.name || "Course Instructor"}
+                                            fill
+                                            className="rounded-full object-cover"
+                                        />
+                                        </div>
+                                        )}
+                                        <div>
+                                            <div className="font-medium">
+                                                {course.instructor.name}
+                                            </div>
+                                            <div className="text-sm text-muted-foreground">
+                                                Instructor
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {course.instructor.bio && (
+                                        <p className="text-muted-foreground">
+                                            {course.instructor.bio}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
