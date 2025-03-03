@@ -653,7 +653,7 @@ export type SearchQueryResult = Array<{
   } | null;
 }>;
 
-// Source: ./sanity/lib/student/getStudentByClerkId.tsx
+// Source: ./sanity/lib/student/getStudentByClerkId.ts
 // Variable: getStudentByClerkIdQuery
 // Query: *[_type == "student" && clerkId == $clerkId][0]
 export type GetStudentByClerkIdQueryResult = {
@@ -669,6 +669,35 @@ export type GetStudentByClerkIdQueryResult = {
   imageUrl?: string;
 } | null;
 
+// Source: ./sanity/lib/student/isEnrolledInCourse.ts
+// Variable: studentQuery
+// Query: *[_type == "student" && clerkId == $clerkId][0]._id
+export type StudentQueryResult = string | null;
+// Variable: enrollmentQuery
+// Query: *[_type == "enrollment" && student._ref == $studentId && course._ref == $courseId][0]
+export type EnrollmentQueryResult = {
+  _id: string;
+  _type: "enrollment";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  student?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "student";
+  };
+  course?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "course";
+  };
+  amount?: number;
+  paymentId?: string;
+  enrolledAt?: string;
+} | null;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -678,5 +707,7 @@ declare module "@sanity/client" {
     "*[_type == \"student\" && clerkId == $clerkId][0] {\n    \"enrolledCourses\": *[_type == \"enrollment\" && student._ref == ^._id] {\n      ...,\n      \"course\": course-> {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n      }\n    }\n  }": GetEnrolledCoursesQueryResult;
     "*[_type == \"course\" && (\n    title match $term + \"*\" ||\n    description match $term + \"*\" ||\n    category->name match $term + \"*\"\n  )] {\n    ...,\n    \"slug\": slug.current,\n    \"category\": category->{...},\n    \"instructor\": instructor->{...}\n  }": SearchQueryResult;
     "*[_type == \"student\" && clerkId == $clerkId][0]": GetStudentByClerkIdQueryResult;
+    "*[_type == \"student\" && clerkId == $clerkId][0]._id": StudentQueryResult;
+    "*[_type == \"enrollment\" && student._ref == $studentId && course._ref == $courseId][0]": EnrollmentQueryResult;
   }
 }
