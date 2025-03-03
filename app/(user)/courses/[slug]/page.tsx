@@ -13,7 +13,7 @@ interface CoursePageProps {
     }>;
 }
 
-export default async function ({ params }: CoursePageProps) {
+export default async function({ params }: CoursePageProps) {
     const { slug } = await params;
     const course = await getCourseBySlug(slug);
     const { userId } = await auth();
@@ -25,7 +25,7 @@ export default async function ({ params }: CoursePageProps) {
 
     if (!course) {
         return (
-            <div className="container mx-auto px-4 py-8 mt-16 text-center">
+            <div className="container mx-auto px-4 py-8 mt-16">
                 <h1 className="text-4xl font-bold">Course not found</h1>
             </div>
         );
@@ -36,16 +36,16 @@ export default async function ({ params }: CoursePageProps) {
             {/* Hero Section */}
             <div className="relative h-[60vh] w-full">
                 {course.image && (
-                    <Image
-                        src={urlFor(course.image).url() || ""}
-                        alt={course.title || "Course Title"}
-                        fill
-                        className="object-cover"
-                        priority
-                    />
+                <Image
+                    src={urlFor(course.image).url() || ""}
+                    alt={course.title || "Course Title"}
+                    fill
+                    className="object-cover"
+                    priority
+                />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-black/40" />
-                <div className="absolute inset-0 container mx-auto px-4 flex flex-col justify-end pb-12">
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-black/60" />
+                    <div className="absolute inset-0 container mx-auto px-4 flex flex-col justify-end pb-12">
                     <Link
                         href="/"
                         prefetch={false}
@@ -55,7 +55,7 @@ export default async function ({ params }: CoursePageProps) {
                         Back to Courses
                     </Link>
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                        <div className="flex-1">
+                        <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <span className="px-3 py-1 bg-white/10 text-white rounded-full text-sm font-medium backdrop-blur-sm">
                                     {course.category?.name || "Uncategorized"}
@@ -68,7 +68,7 @@ export default async function ({ params }: CoursePageProps) {
                                 {course.description}
                             </p>
                         </div>
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:min-w-[300px] flex flex-col items-center text-center">
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:min-w-[300px]">
                             <div className="text-3xl font-bold text-white mb-4">
                                 {course.price === 0 ? "Free" : `$${course.price}`}
                             </div>
@@ -77,7 +77,7 @@ export default async function ({ params }: CoursePageProps) {
                     </div>
                 </div>
             </div>
-
+    
             {/* Content Section */}
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -87,36 +87,36 @@ export default async function ({ params }: CoursePageProps) {
                             <h2 className="text-2xl font-bold mb-4">Course Content</h2>
                             <div className="space-y-4">
                                 {course.modules?.map((module, index) => (
-                                    <div
-                                        key={module._id}
-                                        className="border border-border rounded-lg"
-                                    >
-                                        <div className="p-4 border-b border-border">
-                                            <h3 className="font-medium">
-                                                Module {index + 1}: {module.title}
-                                            </h3>
-                                        </div>
-                                        <div className="divide-y divide-border">
-                                            {module.lessons?.map((lesson, lessonIndex) => (
-                                                <div
-                                                    key={lesson._id}
-                                                    className="p-4 hover:bg-muted/50 transition-colors"
-                                                >
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-medium">
-                                                            {lessonIndex + 1}
-                                                        </div>
-                                                        <div className="flex items-center gap-3 text-foreground">
-                                                            <BookOpen className="h-4 w-4 text-muted-foreground" />
-                                                            <span className="font-medium">
-                                                                {lesson.title}
-                                                            </span>
-                                                        </div>
+                                <div
+                                    key={module._id}
+                                    className="border border-border rounded-lg"
+                                >
+                                    <div className="p-4 border-b border-border">
+                                        <h3 className="font-medium">
+                                            Module {index + 1}: {module.title}
+                                        </h3>
+                                    </div>
+                                    <div className="divide-y divide-border">
+                                        {module.lessons?.map((lesson, lessonIndex) => (
+                                            <div
+                                                key={lesson._id}
+                                                className="p-4 hover:bg-muted/50 transition-colors"
+                                            >
+                                                <div className="flex items-center gap-4">
+                                                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-medium">
+                                                        {lessonIndex + 1}
+                                                    </div>
+                                                    <div className="flex items-center gap-3 text-foreground">
+                                                        <BookOpen className="h-4 w-4 text-muted-foreground" />
+                                                        <span className="font-medium">
+                                                            {lesson.title}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                            ))}
-                                        </div>
+                                            </div>
+                                        ))}
                                     </div>
+                                </div>
                                 ))}
                             </div>
                         </div>
