@@ -35,7 +35,7 @@ export default function Header() {
             <nav>
               <Link
                 prefetch={false}
-                href="/"
+                href="/my-courses"
                 className="flex space-x-2 items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors md:border md:border-border md:rounded-md md:px-4 md:py-2"
               >
                 <BookMarkedIcon className="h-4 w-4" />
