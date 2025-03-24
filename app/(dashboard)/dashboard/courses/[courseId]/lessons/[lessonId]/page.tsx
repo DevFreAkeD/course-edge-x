@@ -4,6 +4,7 @@ import { getLessonById } from "@/sanity/lib/lesson/getLessonById";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { LoomEmbed } from "@/components/LoomEmbedded";
 import { PortableText } from "next-sanity";
+import { LessonCompleteBtn } from "@/components/LessonCompletionBtn";
 
 interface LessonPageProps {
   params: Promise<{
@@ -48,6 +49,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 </div>
               </div>
             )}
+            <div className="flex justify-end">
+              <LessonCompleteBtn lessonId={lesson._id} clerkId={user!.id} />
+            </div>
           </div>
         </div>
       </div>
