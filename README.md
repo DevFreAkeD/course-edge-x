@@ -132,7 +132,7 @@ CLERK_SECRET_KEY=your-clerk-secret-key
 ## 📂 Architecture
 
 ### **Content Schema**
-#### **Courses**
+#### **1. Courses**
 - Title
 - Description
 - Price
@@ -141,24 +141,24 @@ CLERK_SECRET_KEY=your-clerk-secret-key
 - Instructor
 - Category
 
-#### **Modules**
+#### **2. Modules**
 - Title
 - Lessons
 - Order
 
-#### **Lessons**
+#### **3. Lessons**
 - Title
 - Description
 - Video URL
 - Content (Rich Text)
 - Completion Status
 
-#### **Students**
+#### **4. Students**
 - Profile Information
 - Enrolled Courses
 - Progress Data
 
-#### **Instructors**
+#### **5. Instructors**
 - Name
 - Bio
 - Photo
